@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, Fragment } from 'react';
 
 import styles from './Board.module.scss'
 import Cell from './Cell/Cell';
@@ -21,16 +21,24 @@ export const Board: FC = observer(() => {
 
 					const key = `x: ${x}, y: ${y}`
 
-					return <>
-					<Cell
-						key={key}
-						x={x}
-						y={y}
-						color={isEvenX ? "black" : "white"}
-						isAvailableForTurn={isAvailableTurn}
-					/>
-					{gameCell !== null ? <FigureUi key={key + "figure"} figure={gameCell} isSelected={selectedFigure === gameCell}/>: null}
-					</>
+					return <Fragment key={key + "fragment"}>
+						<Cell
+							key={key}
+							x={x}
+							y={y}
+							color={isEvenX ? "black" : "white"}
+							isAvailableForTurn={isAvailableTurn}
+						/>
+						{
+							gameCell !== null
+								? <FigureUi
+									key={gameCell.hash}
+									figure={gameCell}
+									isSelected={selectedFigure === gameCell}
+								/>
+								: null
+						}
+					</Fragment>
 				})
 			})}
 		</div>

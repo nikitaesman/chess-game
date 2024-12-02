@@ -1,6 +1,7 @@
 import { Figure } from "./Figure";
 import { Coordinates, FigureTypes } from "../types";
 import { BaseFigure } from "./BaseFigure";
+import { Queen } from "./Queen";
 
 export class Pawn extends BaseFigure implements Figure {
 	readonly type: FigureTypes = FigureTypes.Pawn
@@ -63,14 +64,19 @@ export class Pawn extends BaseFigure implements Figure {
 	turn = (cords: Coordinates): void => {
 		const isTransform = this.getIsTransformation(cords)
 
-		if(isTransform) {
-			alert("Add transformation")
-		}
+		const figure: Figure = isTransform
+			? new Queen({
+				gameBoard: this.gameBoard,
+				side: this.side,
+				x: cords.x,
+				y: cords.y
+			})
+			: this
 
 		this.basicTurn({
 			cords,
 			availableTurns: this.availableTurns,
-			figure: this
+			figure: figure
 		})
 	}
 }

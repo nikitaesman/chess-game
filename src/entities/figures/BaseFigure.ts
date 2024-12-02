@@ -1,3 +1,4 @@
+import { getRandomString } from "../../utils/getRandomString";
 import { Cell } from "../Cell";
 import { GameBoard } from "../GameBoard";
 import { Coordinates, Side } from "../types";
@@ -12,12 +13,14 @@ interface TurnParams {
 export class BaseFigure extends Cell {
 	readonly side: Side;
 	readonly gameBoard: GameBoard;
+	readonly hash: string
 
 	constructor(params: FigureParams) {
 		super(params)
 
 		this.side = params.side
 		this.gameBoard = params.gameBoard
+		this.hash = getRandomString(5)
 	}
 
 	get isBlack() {

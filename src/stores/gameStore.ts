@@ -3,6 +3,8 @@ import { GameBoard } from "../entities/GameBoard";
 import { Pawn } from "../entities/figures/Pawn";
 import { Coordinates, GameCell } from "../entities/types";
 import { Queen } from "../entities/figures/Queen";
+import { King } from "../entities/figures/King";
+import { Knight } from "../entities/figures/Knight";
 
 class GameStore {
 	gameBoard: GameBoard
@@ -55,14 +57,44 @@ class GameStore {
 			y: 3
 		})
 
+		const pawn4 = new Pawn({
+			gameBoard: this.gameBoard,
+			side: "black",
+			x: 4,
+			y: 5
+		})
+
 		this.gameBoard.setCell(pawn)
 		this.gameBoard.setCell(pawn2)
 		this.gameBoard.setCell(pawn3)
-		this.gameBoard.setCell(new Queen({
+		this.gameBoard.setCell(pawn4)
+
+		this.gameBoard.setCell(new King({
 			gameBoard: this.gameBoard,
 			side: "black",
 			x: 3,
 			y: 3
+		}))
+
+		this.gameBoard.setCell(new King({
+			gameBoard: this.gameBoard,
+			side: "white",
+			x: 6,
+			y: 3
+		}))
+
+		this.gameBoard.setCell(new Knight({
+			gameBoard: this.gameBoard,
+			side: "white",
+			x: 3,
+			y: 5
+		}))
+
+		this.gameBoard.setCell(new Queen({
+			gameBoard: this.gameBoard,
+			side: "black",
+			x: 5,
+			y: 5
 		}))
 	}
 
